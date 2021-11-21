@@ -15,7 +15,7 @@ import javax.persistence.Id;
  * @author LEONEL
  */
 @Entity
-public class Natureza_Processo extends SuperModel implements Serializable {//ref,nome
+public class Tribunal_Distrital extends SuperModel implements Serializable {//ref,nome,descricao
 
     @Id
     @GeneratedValue
@@ -23,13 +23,18 @@ public class Natureza_Processo extends SuperModel implements Serializable {//ref
     private int uid;
     private String ref;
     private String nome;
-    private String create_date; 
+    private String create_date;
     boolean activo;
-    
-    public Natureza_Processo(String ref, String nome) {
+
+    private String seccao;
+
+    public Tribunal_Distrital() {
+    }
+
+    public Tribunal_Distrital(String ref, String nome, String seccao) {
         this.ref = ref;
         this.nome = nome;
-        
+        this.seccao = seccao;
     }
 
     public int getId() {
@@ -72,12 +77,20 @@ public class Natureza_Processo extends SuperModel implements Serializable {//ref
         this.create_date = create_date;
     }
 
+    public String getSeccao() {
+        return seccao;
+    }
+
+    public void setSeccao(String seccao) {
+        this.seccao = seccao;
+    }
+
     public boolean isActivo() {
         return activo;
     }
 
     public void setActivo(boolean activo) {
         this.activo = activo;
-    }
+    } 
     
 }

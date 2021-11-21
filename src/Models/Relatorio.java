@@ -10,6 +10,6 @@ package Models;
  */
 public class Relatorio {//periodo, tribunal_distrital, data_termino, 
     /**
-     * estado(entrado,pendente,findo)
+     * estado(entrado,pendente,findo) - 
      */
 }
