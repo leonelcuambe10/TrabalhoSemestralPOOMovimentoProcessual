@@ -1,5 +1,6 @@
 package Models;
 
+import Controllers.ControlaSuperModel;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ public class Usuario extends SuperModel implements Serializable {
 
     @Id
     @GeneratedValue
-    public int id;
+    private int id;
     private int uid;
     private String ref;
     private String nome;
@@ -23,11 +24,15 @@ public class Usuario extends SuperModel implements Serializable {
 
     private String login;
     private String senha;
+    private String tipo;
 
     public Usuario() {
     }
 
-    public Usuario(String ref, String nome, String login, String senha) {
+    public Usuario(String ref, String nome, boolean activo, String login, String senha) {
+        this.ref = ref;
+        this.nome = nome;
+        this.activo = activo;
         this.login = login;
         this.senha = senha;
     }
@@ -94,6 +99,19 @@ public class Usuario extends SuperModel implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String getSrc() {
+        return id + "|" + new ControlaSuperModel(this).getExpressinById(this, uid) + "|" + ref + "|" + nome + "|" + create_date + "|" + activo + "|" + login + "|" + senha + "|" + tipo;
     }
 
 }

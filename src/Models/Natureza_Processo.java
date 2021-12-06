@@ -5,6 +5,7 @@
  */
 package Models;
 
+import Controllers.ControlaSuperModel;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,13 +24,16 @@ public class Natureza_Processo extends SuperModel implements Serializable {//ref
     private int uid;
     private String ref;
     private String nome;
-    private String create_date; 
+    private String create_date;
     boolean activo;
-    
+
+    public Natureza_Processo() {
+    }
+
     public Natureza_Processo(String ref, String nome) {
         this.ref = ref;
         this.nome = nome;
-        
+
     }
 
     public int getId() {
@@ -79,5 +83,10 @@ public class Natureza_Processo extends SuperModel implements Serializable {//ref
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
+
+    @Override
+    public String getSrc() {
+        return id + "|" + new ControlaSuperModel(this).getExpressinById(new Usuario(), uid) + "|" + ref + "|" + nome + "|" + create_date + "|" + activo;
+    }
+
 }

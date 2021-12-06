@@ -5,17 +5,64 @@
  */
 package Views;
 
+import Views.pLivroPorta;
+import Jars.Metodos;
+import Models.Usuario;
+import java.awt.CardLayout;
+import javax.swing.JButton;
+
 /**
  *
  * @author LEONEL
  */
 public class TelaMenu extends javax.swing.JFrame {
+    
+    Metodos met = new Metodos();
+    private CardLayout layoutCentral;
 
     /**
      * Creates new form Tela_Menu
      */
-    public TelaMenu() {
+    public TelaMenu(Usuario uid) {
         initComponents();
+        setSize(1000, 600);
+        setLocationRelativeTo(this);
+        
+        act(uid);
+        permissoes(uid);
+    }
+    
+    private void permissoes(Usuario uid) {
+        if (uid.getId() != 1) {
+            btnUsuarios.setEnabled(false);
+            btnProcesso.setEnabled(false);
+            btnTribunal.setEnabled(false);
+        }
+    }
+    
+    private void act(Usuario uid) {
+        pUsuario pUsuario = new pUsuario(uid);
+        pLivroPorta pNatPro = new pLivroPorta(this, uid);
+        pNaturezaProcesso pProcess = new pNaturezaProcesso(uid);
+        pTribunal pTribunal = new pTribunal(uid);
+        pRelatorio pRelatorio = new pRelatorio(this, uid);
+        
+        layoutCentral = (CardLayout) pCard.getLayout();
+        pCard.add(pInicio, "Início");
+        pCard.add(pUsuario, "Usuarios");
+        pCard.add(pNatPro, "Livro de Porta");
+        pCard.add(pProcess, "Natureza");
+        pCard.add(pTribunal, "Tribunal");
+        pCard.add(pRelatorio, "Relatórios");
+        
+        JButton[] btns = new JButton[]{btnInicio, btnLivro, btnProcesso, btnTribunal, btnUsuarios, btnRelatorio};
+        for (JButton btn : btns) {
+            btn.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    layoutCentral.show(pCard, btn.getText());
+                }
+            });
+        }
     }
 
     /**
@@ -27,79 +74,97 @@ public class TelaMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnInicio = new javax.swing.JButton();
+        btnLivro = new javax.swing.JButton();
+        btnProcesso = new javax.swing.JButton();
+        btnTribunal = new javax.swing.JButton();
+        btnUsuarios = new javax.swing.JButton();
+        btnRelatorio = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        pCard = new javax.swing.JPanel();
+        pInicio = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
+        setResizable(false);
+        getContentPane().setLayout(new java.awt.BorderLayout(2, 2));
 
-        jButton1.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
-        jButton1.setText("Formularios");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel3.setPreferredSize(new java.awt.Dimension(797, 40));
+        jPanel3.setLayout(new java.awt.CardLayout(5, 2));
+
+        jPanel6.setLayout(new java.awt.BorderLayout(2, 2));
+
+        jPanel1.setLayout(new java.awt.GridLayout(1, 5, 5, 0));
+
+        btnInicio.setText("Início");
+        jPanel1.add(btnInicio);
+
+        btnLivro.setText("Livro de Porta");
+        jPanel1.add(btnLivro);
+
+        btnProcesso.setText("Natureza");
+        jPanel1.add(btnProcesso);
+
+        btnTribunal.setText("Tribunal");
+        jPanel1.add(btnTribunal);
+
+        btnUsuarios.setText("Usuarios");
+        jPanel1.add(btnUsuarios);
+
+        btnRelatorio.setText("Relatórios");
+        jPanel1.add(btnRelatorio);
+
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSairActionPerformed(evt);
             }
         });
+        jPanel1.add(btnSair);
 
-        jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
-        jLabel1.setText("MENU");
+        jPanel6.add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addContainerGap(587, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
+        jPanel3.add(jPanel6, "card2");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel4.setLayout(new java.awt.CardLayout(5, 2));
+
+        pCard.setLayout(new java.awt.CardLayout());
+
+        pInicio.setLayout(new java.awt.GridLayout(5, 5, 5, 5));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Bem Vindo ao Sistema");
+        pInicio.add(jLabel1);
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("De Monitoria do Movimeto Processual");
+        pInicio.add(jLabel2);
+
+        pCard.add(pInicio, "card2");
+
+        jPanel4.add(pCard, "card2");
+
+        getContentPane().add(jPanel4, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+         new TelaLogin().setVisible(true);
+         dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,15 +197,26 @@ public class TelaMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaMenu().setVisible(true);
+                new TelaMenu(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnInicio;
+    private javax.swing.JButton btnLivro;
+    private javax.swing.JButton btnProcesso;
+    private javax.swing.JButton btnRelatorio;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnTribunal;
+    private javax.swing.JButton btnUsuarios;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel pCard;
+    private javax.swing.JPanel pInicio;
     // End of variables declaration//GEN-END:variables
 }

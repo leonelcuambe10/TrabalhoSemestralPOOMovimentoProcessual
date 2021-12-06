@@ -11,7 +11,8 @@ import java.io.Serializable;
  *
  * @author LEONEL
  */
-public class SuperModel implements Serializable {
+public abstract class SuperModel implements Serializable {
     public SuperModel() {
     }
+    public abstract String getSrc();
  }

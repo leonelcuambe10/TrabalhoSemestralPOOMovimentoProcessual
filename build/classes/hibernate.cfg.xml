@@ -47,8 +47,7 @@ Contributor(s):
 <property name="hibernate.connection.username">root</property>
 <property name="hibernate.hbm2ddl.auto">update</property>
 <mapping class="Models.Livro_Porta"/>
-<mapping class="Models.Tribunal_Distrital"/>
-<mapping class="Models.RegistoMovimento"/>
+<mapping class="Models.Tribunal"/> 
 <mapping class="Models.Natureza_Processo"/> 
 <mapping class="Models.Usuario"/>  
   </session-factory>

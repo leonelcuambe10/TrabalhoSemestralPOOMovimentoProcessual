@@ -5,18 +5,39 @@
  */
 package Views;
 
+import Controllers.ControlaSuperModel;
+import Jars.Metodos;
+import Models.SuperModel;
+import Models.Usuario;
 import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
- *Tela inicial para que tenhamos acesso ao sistema
+ * Tela inicial para que tenhamos acesso ao sistema
+ *
  * @author LEONEL
  */
 public class TelaLogin extends javax.swing.JFrame {
 
-    
+    ControlaSuperModel con = new ControlaSuperModel(new Usuario());
+    Metodos met = new Metodos();
+    Usuario uid = null;
+
     public TelaLogin() {
         initComponents();
+    }
+
+    private void getUid() {
+        String login = met.getTxt(txtUsuario);
+        String senha = met.getTxt(txtPassword);
+        uid = null;
+        for (SuperModel sm : con.getLista()) {
+            Usuario o = (Usuario) sm;
+            if (o.getLogin().equals(login) && o.getSenha().equals(senha)) {
+                uid = o;
+                break;
+            }
+        }
     }
 
     /**
@@ -116,27 +137,28 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 48)); // NOI18N
         jLabel3.setText("SIS-MPT");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(220, 30, 180, 53);
+        jLabel3.setBounds(220, 40, 180, 53);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
-        if (txtUsuario.getText().equals("Leonel") && txtPassword.getText().equals("1234")) {
-           TelaMenu tela = new TelaMenu();
-           tela.setVisible(true);
-           dispose();
-        } else{
+        getUid();
+        if (uid != null) {
+            TelaMenu tela = new TelaMenu(uid);
+            tela.setVisible(true);
+            dispose();
+        } else {
             JOptionPane.showMessageDialog(null, "Credenciais erradas");
             txtUsuario.requestFocus();
         }
-        
+
     }//GEN-LAST:event_btnAcessarActionPerformed
 
     private void ckbPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbPasswordActionPerformed
         if (ckbPassword.isSelected()) {
-            txtPassword.setEchoChar((char)0);
+            txtPassword.setEchoChar((char) 0);
         } else {
             txtPassword.setEchoChar('*');
         }
@@ -144,17 +166,18 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txtUsuario.getText().equals("Leonel") && txtPassword.getText().equals("1234")) {
-                TelaMenu tela = new TelaMenu();
+            getUid();
+            if (uid != null) {
+                TelaMenu tela = new TelaMenu(uid);
                 tela.setVisible(true);
                 dispose();
-            } else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Credenciais erradas");
                 txtUsuario.requestFocus();
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_txtPasswordKeyPressed
 
     private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
@@ -202,6 +225,118 @@ public class TelaLogin extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

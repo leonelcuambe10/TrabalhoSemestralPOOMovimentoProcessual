@@ -1,40 +1,40 @@
 package Controllers;
-
-import Conexao.Util;
-import java.util.ArrayList;
-import java.util.List; 
+ 
+import Conexao.Util; 
+import java.util.ArrayList; 
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class ControlaGenerico<G> {
-
+    
     public final SessionFactory sf = Util.getSessionFactory();
     Session sessao;
     Transaction ts;
-
+    
     private final Object model;
-
+    
     private void print(Object msg) {
         System.out.println("[" + className + "] " + msg);
     }
-
+    
     public SessionFactory getSF() {
         return sf;
     }
     String className = "";
- 
+    
     public ControlaGenerico(Object model) {
         this.model = model;
-        className = model.getClass().getName();
+        className = model.getClass().getName(); 
     }
-
+    
     public void habilitaSessao() {
         sessao = sf.openSession();
         ts = sessao.beginTransaction();
     }
-
+    
     public boolean commit_AND_Close() {
         boolean did = true;
         try {
@@ -46,7 +46,7 @@ public class ControlaGenerico<G> {
         }
         return did;
     }
-
+    
     public boolean create(G ob) {
         boolean did = true;
         try {
@@ -60,7 +60,7 @@ public class ControlaGenerico<G> {
         }
         return did;
     }
-
+    
     public boolean write(G ob) {
         boolean did = true;
         try {
@@ -74,16 +74,19 @@ public class ControlaGenerico<G> {
         }
         return did;
     }
-
-    public void delete(G ob) {
+    
+    public boolean delete(G ob) {
+        boolean did = true;
         try {
             habilitaSessao();
             sessao.delete(ob);
         } catch (Exception ex) {
             print("delete.ex: " + ex);
+            did = false;
         } finally {
-            commit_AND_Close();
+            did = commit_AND_Close();
         }
+        return did;
     }
 
     public G search(int id) {
@@ -98,7 +101,6 @@ public class ControlaGenerico<G> {
         }
         return e;
     }
-
     public ArrayList<G> getLista() {
         ArrayList<G> lst = new ArrayList<>();
         try {
@@ -113,5 +115,9 @@ public class ControlaGenerico<G> {
             commit_AND_Close();
         }
         return lst;
+    }
+    public G getLast() {
+        ArrayList<G> lst = getLista();
+        return lst.get(lst.size() - 1);
     }
 }

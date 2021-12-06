@@ -5,6 +5,7 @@
  */
 package Models;
 
+import Controllers.ControlaSuperModel;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,23 +22,33 @@ public class Livro_Porta extends SuperModel implements Serializable {
     @GeneratedValue
     public int id;
     private int uid;
+    public int state_id;
     private String ref;
     private String nome;
     private String create_date;
     boolean activo;
 
+    private int tribunal_id;
     private int natureza_id;
     private String data_entrada;
+    public String data_actualizacao="";
     private String data_findo;
     private String senteca;//(=estado findo)
     private String nr_processo;
 
     private String autor;//(do processo)
     private String arguido;
+    private String estado;
 
-    public Livro_Porta(String ref, String nome, int natureza_id, String data_entrada, String data_findo, String senteca, String nr_processo, String autor, String arguido) {
+    public int ponto;// sera = um caso o estado nao seja Transitado
+
+    public Livro_Porta() {
+    }
+
+    public Livro_Porta(String ref, String nome, int tribunal_id, int natureza_id, String data_entrada, String data_findo, String senteca, String nr_processo, String autor, String arguido, String estado,String data_actualizacao) {
         this.ref = ref;
         this.nome = nome;
+        this.tribunal_id = tribunal_id;
         this.natureza_id = natureza_id;
         this.data_entrada = data_entrada;
         this.data_findo = data_findo;
@@ -45,6 +56,8 @@ public class Livro_Porta extends SuperModel implements Serializable {
         this.nr_processo = nr_processo;
         this.autor = autor;
         this.arguido = arguido;
+        this.estado = estado;
+        this.data_actualizacao = data_actualizacao;
     }
 
     public int getId() {
@@ -85,6 +98,14 @@ public class Livro_Porta extends SuperModel implements Serializable {
 
     public void setCreate_date(String create_date) {
         this.create_date = create_date;
+    }
+
+    public int getTribunal_id() {
+        return tribunal_id;
+    }
+
+    public void setTribunal_id(int tribunal_id) {
+        this.tribunal_id = tribunal_id;
     }
 
     public int getNatureza_id() {
@@ -150,5 +171,19 @@ public class Livro_Porta extends SuperModel implements Serializable {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String getSrc() {
+        ControlaSuperModel con = new ControlaSuperModel(this);
+        return id + "|" + con.getExpressinById(new Usuario(), uid) + "|" + ref + "|" + nome + "|" + create_date + "|" + activo + "|" + con.getExpressinById(new Tribunal(), tribunal_id) + "|" + con.getExpressinById(new Natureza_Processo(), natureza_id) + "|" + data_entrada + "|" + data_findo + "|" + senteca + "|" + nr_processo + "|" + autor + "|" + arguido + "|" + estado;
+    }
+
 }
